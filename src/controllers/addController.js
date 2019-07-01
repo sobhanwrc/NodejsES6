@@ -1,17 +1,30 @@
-import addNewDownload from '../use-cases/insert'
- 
-// add new user to the database
-export const addNewDownloads = async (req, res) => {
-    var addResult = await addNewDownload(req.body)
-    if(addResult == true){
-        res.json({
-            success: true,
-            message : "User details added successfully."
-        })
-    }else{
-        res.json({
-            success: false,
-            message : "User details added faild."
-        })
+export default function addNewUserToDB ({addUser}) {
+    return async function add(httpRequest) {
+        const headers = {
+            'Content-Type': 'application/json'
+        }
+        try{
+            const addData = await addUser(httpRequest.body)
+            console.log(addData,'addData');
+            if(addData == 1) {
+                return {
+                    headers,
+                    statusCode: 200,
+                    body:{
+                        "isSuccess" : true,
+                        "message" : "User added successfully."
+                    }
+                }
+            }
+        }catch(e) {
+            console.log(e,'error')
+            return {
+                headers,
+                statusCode: 400,
+                body: {
+                    error: e.message
+                }
+            }
+        }
     }
 }

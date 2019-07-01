@@ -1,11 +1,13 @@
 import addNewDownload from './insert'
 import allUserDetails from './list'
 
-const getUserAllDetails = allUserDetails();
+const listOfAllUser = allUserDetails();
+const addUser = addNewDownload();
 
-const commentService = Object.freeze({
-  getUserAllDetails
+const testService = Object.freeze({
+  listOfAllUser,
+  addUser
 })
 
-export default commentService
-export { getUserAllDetails }
+export default testService
+export { listOfAllUser, addUser }
