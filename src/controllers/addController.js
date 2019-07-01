@@ -5,7 +5,6 @@ export default function addNewUserToDB ({addUser}) {
         }
         try{
             const addData = await addUser(httpRequest.body)
-            console.log(addData,'addData');
             if(addData == 1) {
                 return {
                     headers,
